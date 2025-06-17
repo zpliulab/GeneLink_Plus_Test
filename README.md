@@ -87,6 +87,12 @@ Once you have chosen the above network model parameters and dataset, run `Demo\G
 
 ` python Demo\G_res4_v2_L2.py`
 
+If you wish to perform independent replicates, we recommend starting from the data-splitting step by running:
+
+` python Demo\Train_Test_Split.py`
+
+to generate a new train/test partition before re‑training the model. This ensures that performance estimates reflect genuine model behavior rather than artifacts of a single dataset split.
+
 Other datasets for Benchmark can be found in the `Benchmark Dataset`, with the structure as follows:
 
      Benchmark Dataset

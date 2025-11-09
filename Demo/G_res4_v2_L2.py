@@ -36,7 +36,8 @@ torch.manual_seed(args.seed)
 np.random.seed(args.seed)
 
 
-data_type = 'mHSC-E'
+# data_type = 'mHSC-E'
+data_type = 'mESC'
 num = 1000
 net_type = 'Specific'
 
@@ -254,8 +255,8 @@ for epoch in range(args.epochs):
 
 end_time = time.time()  # time end
 total_time = end_time - start_time
-
-print(f'Total training time: {total_time:.2f} seconds')
+# print(f"运行总时间为{end_time - start_time}秒")
+# print(f'Total training time: {total_time:.2f} seconds')
 
 torch.save(model.state_dict(), model_path + data_type+' '+str(num)+'.pkl')
 

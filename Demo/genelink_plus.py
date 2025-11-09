@@ -16,7 +16,7 @@ import argparse
 # parser
 parser = argparse.ArgumentParser()
 parser.add_argument('--lr', type=float, default=3e-3, help='Initial learning rate.')
-parser.add_argument('--epochs', type=int, default= 150, help='Number of epoch.')
+parser.add_argument('--epochs', type=int, default= 100, help='Number of epoch.')
 parser.add_argument('--num_head', type=list, default=[3,3,3], help='Number of head attentions.')
 parser.add_argument('--alpha', type=float, default=0.2, help='Alpha for the leaky_relu.')
 parser.add_argument('--hidden_dim', type=int, default=[128,64,64,32], help='The dimension of hidden layer')
@@ -39,7 +39,7 @@ np.random.seed(args.seed)
 
 
 # data_type = 'mHSC-E'
-data_type = 'hESC'
+data_type = args.data_type
 num = 1000
 net_type = 'Specific'
 # net_type = 'Non-Specific'
@@ -258,7 +258,7 @@ for epoch in range(args.epochs):
 
 end_time = time.time()  # time end
 total_time = end_time - start_time
-# print(f"运行总时间为{end_time - start_time}秒")
+print(f"运行总时间为{end_time - start_time}秒")
 # print(f'Total training time: {total_time:.2f} seconds')
 
 torch.save(model.state_dict(), model_path + data_type+' '+str(num)+'.pkl')
@@ -280,5 +280,5 @@ else:
 
 AUC, AUPR, AUPR_norm = Evaluation(y_pred=score, y_true=test_data[:, -1],flag=args.flag)
 
-print('AUC:{}'.format(AUC),
+print('构建网络精度为 AUC:{}'.format(AUC),
      'AUPRC:{}'.format(AUPR))

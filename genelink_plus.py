@@ -27,7 +27,7 @@ parser.add_argument('--seed', type=int, default=8, help='Random seed')
 parser.add_argument('--Type',type=str,default='b_dot', help='score metric')
 parser.add_argument('--flag', type=bool, default=False, help='the identifier whether to conduct causal inference')
 parser.add_argument('--reduction',type=str,default='concate', help='how to integrate multihead attention')
-parser.add_argument('--data_type',type=str,default='PBMC', help='choose dataset hESC, Dataset mESC or Dataset PBMC')
+parser.add_argument('--data_type',type=str,default='PBMC3000', help='choose dataset hESC, dataset mESC, dataset PBMC3000, dataset PBMC4000')
 
 
 
@@ -41,10 +41,14 @@ np.random.seed(args.seed)
 
 # data_type = 'mHSC-E'
 data_type = args.data_type
-if data_type == 'PBMC':
-    num = 9000
-else:
+if data_type == 'hESC' or data_type == 'mESC':
     num = 1000
+else:
+    letters = "".join(ch for ch in data_type if ch.isalpha())
+    numbers = "".join(ch for ch in data_type if ch.isdigit())
+    data_type = letters
+    num = int(numbers)
+
 net_type = 'Specific'
 # net_type = 'Non-Specific'
 
@@ -65,7 +69,7 @@ def embed2file(tf_embed,tg_embed,gene_file,tf_path,target_path):
 
 # data load
 
-density = Network_Statistic(data_type,num,net_type)
+# density = Network_Statistic(data_type,num,net_type)
 
 # path
 if os.name == 'nt':  # Windows
